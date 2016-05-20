@@ -1,0 +1,11 @@
+{
+  "name": "wot_contestant",
+  "version": "1.0.0",
+  "description": "A service returning a list of the last 25 World of Tanks Cup contestants",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Florian Meskens",
+  "license": "ISC"
+}
