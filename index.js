@@ -11,6 +11,7 @@
 	// enable CLI mode
 	if(justDoIt === 'cli'){
 		var CupsManager = require('./managers/cupsmanager');
+		// Hardcoded for the purpose of the task.
 		var options = {
 			game: process.argv[3] || 'worldoftanks',
 			zone: process.argv[4] || 'europe',
