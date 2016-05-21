@@ -9,7 +9,7 @@
   "author": "Florian Meskens",
   "license": "ISC",
   "dependencies": {
+    "config": "^1.20.3",
     "hapi": "^13.4.0",
-    "request-promise": "^3.0.0"
   }
 }

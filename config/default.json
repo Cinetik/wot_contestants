@@ -1,0 +1,12 @@
+{
+	// ESL Api Config
+	"ESLAPI": {
+		"host": "play.eslgaming.com",
+		"port": 80,
+		"protocol": "http"
+	},
+	// local service config
+	"local": {
+		"port": 1337
+	}
+}
