@@ -22,10 +22,11 @@
 						}
 					}
 					Promise.all(promises).then(function(cups){
+						// processing ranking in every cups
 						cups.map(function(cup){
 							var ranking = cup.ranking;
 							if(ranking){
-								for (var rank in ranking){
+								for (var rank in ranking){ // could be a .map
 									var team = ranking[rank].team;
 									var position = ranking[rank].position;
 									if(!teams[cup.teamSize][team.id]){
@@ -34,7 +35,7 @@
 											'bestPosition': position,
 											'worstPosition': position,
 										};
-									} else{
+									} else {
 										teams[cup.teamSize][team.id].cupsPlayed++;
 										if(position < teams[cup.teamSize][team.id].bestPosition){
 											teams[cup.teamSize][team.id].bestPosition = position;
@@ -54,6 +55,7 @@
 			});
 		},
 		config: {
+			// request params validation
 			validate: {
 				params: {
 					game: Joi.string(),
@@ -65,6 +67,7 @@
 	};
 
 	module.exports = [
+		// applying new routes
 		Hoek.applyToDefaults(routeConfig, {
 			path: "/cups/{game}/{zone}"
 		}),
