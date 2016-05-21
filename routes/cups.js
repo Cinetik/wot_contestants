@@ -1,15 +1,17 @@
 (function(){
 	'use strict';
-	var CupsManager = require('./cupsmanager');
+	var CupsManager = require('../managers/cupsmanager');
+	var Hoek = require('hoek');
+	var Joi = require('joi');
 
-	module.exports = [
-		{
+	var routeConfig =
+	{
 		method: 'GET',
-		path: '/',
 		handler: function (request, reply) {
 			Promise.resolve(new CupsManager()).then(function(cManager){
 				var teams = {};
-				cManager.getAll().then(function(cups){
+				var limit = request.params.limit || 25; // default to 25
+				cManager.getAll(request.params.game, request.params.zone, limit).then(function(cups){
 					var promises = [];
 					if(cups){
 						for (var id in cups){
@@ -50,7 +52,25 @@
 					reply('Error while retrieving cups', error);
 				});
 			});
+		},
+		config: {
+			validate: {
+				params: {
+					game: Joi.string(),
+					zone: Joi.string().regex(/^(europe|north-america|anz)$/i),
+					limit: Joi.number().optional(),
+				}
+			}
 		}
-	}
+	};
+
+	module.exports = [
+		Hoek.applyToDefaults(routeConfig, {
+			path: "/cups/{game}/{zone}"
+		}),
+		Hoek.applyToDefaults(routeConfig, {
+			path: "/cups/{game}/{zone}/limit/{limit?}"
+		}),
 	];
+
 })();

@@ -14,24 +14,32 @@
 				throw 'No configured host';
 			}
 			this.host = config.get('ESLAPI.host');
+			this.apiPath = config.get('ESLAPI.apiPath') + '/leagues';
 			// These we could default as it's a public api
 			this.protocol = config.get('ESLAPI.protocol') || 'http';
 			this.port = config.get('ESLAPI.port') || 80;
 	}
 
-
-	CupsManager.prototype.getAll = function (){
+	/**
+	 * GetAll function returns every cup for a game in a zone from ESL API
+	 * @param Sring game - game to look for
+	 * @param Sring zone - world zone to look for
+	 * @param Integer limit - search result limit
+	 * @param Sring status - restrict search by cups status
+	 * @return Promise object
+	 */
+	CupsManager.prototype.getAll = function (game, zone, limit){
 		var self = this;
 		// Construct query url
 		var fullUrl = url.format({
 			protocol: 'http:',
 			host: this.host,
-			pathname: '/api/leagues',
+			pathname: this.apiPath,
 			query: {
 				'types': 'cup',
-				'states': 'finished',
-				'limit.total': 25,
-				'path': '/play/worldoftanks/europe/',
+				'state': 'finished',
+				'limit.total': limit,
+				'path': '/play/'+ game +'/' + zone +'/',
 			}
 		});
 
@@ -62,12 +70,17 @@
 		});
 	};
 
+	/**
+	 * Get function return cup details based on cup ID
+	 * @param Object cup - Object returned by ESL API
+	 * @return Promise object
+	 */
 	CupsManager.prototype.get = function(cup){
 		var self = this;
 		var fullUrl = url.format({
 			protocol: 'http:',
 			host: this.host,
-			pathname: '/api/leagues/' + cup.id + '/ranking',
+			pathname: this.apiPath + '/' + cup.id + '/ranking',
 			query: {
 				'limit': 25,
 			}

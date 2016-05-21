@@ -8,8 +8,11 @@
   },
   "author": "Florian Meskens",
   "license": "ISC",
+  "repository": "https://github.com/Cinetik/wot_contestants"
   "dependencies": {
     "config": "^1.20.3",
     "hapi": "^13.4.0",
+    "hoek": "^4.0.0",
+    "joi": "^8.1.0"
   }
 }

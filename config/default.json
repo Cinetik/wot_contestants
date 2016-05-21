@@ -3,7 +3,8 @@
 	"ESLAPI": {
 		"host": "play.eslgaming.com",
 		"port": 80,
-		"protocol": "http"
+		"protocol": "http",
+		"apiPath": "/api"
 	},
 	// local service config
 	"local": {

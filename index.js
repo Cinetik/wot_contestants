@@ -5,13 +5,14 @@
 	var server = new Hapi.Server();
 	var http = require('http');
 	var config = require('config');
+
 	// Server running on leet ninja port
 	server.connection({
 		port: config.get('local.port')
 	});
 
 	// Loading route to access service
-	server.route(require('./routes'));
+	server.route(require('./routes/cups'));
 
 	// start API service
 	server.start(function(error){
