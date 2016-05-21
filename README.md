@@ -52,3 +52,11 @@ Generic routes available, returning the same result format as above
 	GET localhost:1337/cups/{gameName}/{zone} // zone must equal {'europe', 'north-america' or 'anz'}
 	GET localhost:1337/cups/{gameName}/{zone}/limit/{limit} // limit number of cups
 ```
+
+### Run in CLI mode
+
+To run the service in CLI, you can call it that way:
+
+``` node index.js cli [game] [zone] [limit] ```
+
+Defaults values are worldoftanks europe 25
