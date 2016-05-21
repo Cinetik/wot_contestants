@@ -37,7 +37,7 @@
 			pathname: this.apiPath,
 			query: {
 				'types': 'cup',
-				'state': 'finished',
+				'states': 'finished',
 				'limit.total': limit,
 				'path': '/play/'+ game +'/' + zone +'/',
 			}
