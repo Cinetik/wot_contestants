@@ -25,7 +25,6 @@
 	 * @param Sring game - game to look for
 	 * @param Sring zone - world zone to look for
 	 * @param Integer limit - search result limit
-	 * @param Sring status - restrict search by cups status
 	 * @return Promise object
 	 */
 	CupsManager.prototype.getAll = function (game, zone, limit){
@@ -112,6 +111,60 @@
 			}).on('error', function(error){
 				reject(error);
 			});
+		});
+	};
+
+	/**
+	 *	Wrapper method to process contestants from game cups in a zone
+	 * @param Sring game - game to look for
+	 * @param Sring zone - world zone to look for
+	 * @param Integer limitResults - search result limit
+	 * @return Promise object
+	 */
+	CupsManager.prototype.getContestants = function(game, zone, limitResults){
+		var self = this;
+		var teams = {};
+		var limit = limitResults || 25; // default to 25
+		return self.getAll(game, zone, limit).then(function(cups){
+			var promises = [];
+			if(cups){
+				for (var id in cups){
+					if (!teams[cups[id].teamSize]){
+						teams[cups[id].teamSize] = {};
+					}
+					promises.push(self.get(cups[id]));
+				}
+			}
+			return Promise.all(promises).then(function(cups){
+				// processing ranking in every cups
+				cups.map(function(cup){
+					var ranking = cup.ranking;
+					if(ranking){
+						for (var rank in ranking){ // could be a .map
+							var team = ranking[rank].team;
+							var position = ranking[rank].position;
+							if(!teams[cup.teamSize][team.id]){
+								teams[cup.teamSize][team.id] = {
+									'cupsPlayed': 1,
+									'bestPosition': position,
+									'worstPosition': position,
+								};
+							} else {
+								teams[cup.teamSize][team.id].cupsPlayed++;
+								if(position < teams[cup.teamSize][team.id].bestPosition){
+									teams[cup.teamSize][team.id].bestPosition = position;
+								}
+								if(position > teams[cup.teamSize][team.id].worstPosition){
+									teams[cup.teamSize][team.id].worstPosition = position;
+								}
+							}
+						}
+					}
+				});
+				return teams;
+			});
+		}).catch(function(error){
+			reply('Error while retrieving cups', error);
 		});
 	};
 
