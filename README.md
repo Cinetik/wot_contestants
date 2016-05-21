@@ -4,7 +4,7 @@ A small service returning a list of World of Tanks Cup contestants in ESL cups g
 
 ## Requirements
 
-Nodejs 4.4.4+  
+Nodejs 4.4.4+ (LTS)
 
 ## Installation
 
@@ -12,7 +12,7 @@ Clone this repository:
 
 ``` git clone https://github.com/cinetik/wot_contestants ```
 
-Install dependancies
+Install dependencies
 
 ``` npm install ```
 
