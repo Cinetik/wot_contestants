@@ -10,7 +10,7 @@ Nodejs 4.4.4+
 
 Clone this repository:
 
-``` git clone https://github.com/cinetik/wot_contestant ```
+``` git clone https://github.com/cinetik/wot_contestants ```
 
 Install dependancies
 
