@@ -21,6 +21,6 @@
     "nock": "^8.0.0"
     },
   "scripts": {
-    "test": "node_modules/lab/bin/lab -a code -p"
+    "test": "node node_modules/lab/bin/lab -a code -p"
   }
 }
