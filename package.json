@@ -14,5 +14,13 @@
     "hapi": "^13.4.0",
     "hoek": "^4.0.0",
     "joi": "^8.1.0"
+  },
+  "devDependencies": {
+    "code": "^3.0.0",
+    "lab": "^10.6.1",
+    "nock": "^8.0.0"
+    },
+  "scripts": {
+    "test": "node_modules/lab/bin/lab -a code -p"
   }
 }
