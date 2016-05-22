@@ -6,8 +6,6 @@
 	var Code = require('code');
 	var Lab = require('lab');
  	var lab = exports.lab = Lab.script();
-	var config = require('config');
-	var url = require('url');
 	var fs = require('fs');
 
 	var expect = Code.expect;
@@ -50,7 +48,7 @@
 				done();
 			}).catch(done);
 		});
-		
+
 	});
 
 })();
