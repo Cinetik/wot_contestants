@@ -163,8 +163,6 @@
 				});
 				return teams;
 			});
-		}).catch(function(error){
-			reply('Error while retrieving cups', error);
 		});
 	};
 
