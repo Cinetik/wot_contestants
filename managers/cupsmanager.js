@@ -145,9 +145,9 @@
 							var position = ranking[rank].position;
 							if(!teams[cup.teamSize][team.id]){
 								teams[cup.teamSize][team.id] = {
-									'cupsPlayed': 1,
-									'bestPosition': position,
-									'worstPosition': position,
+									cupsPlayed: 1,
+									bestPosition: position,
+									worstPosition: position,
 								};
 							} else {
 								teams[cup.teamSize][team.id].cupsPlayed++;

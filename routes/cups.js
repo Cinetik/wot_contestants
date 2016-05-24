@@ -12,7 +12,7 @@
 				var limit = request.params.limit || 25;
 				cManager.getContestants(request.params.game, request.params.zone, limit)
 					.then(function(teams){
-						reply(teams);
+						reply(JSON.stringify(teams));
 					}).catch(function(reason){
 						reply(reason);
 					});

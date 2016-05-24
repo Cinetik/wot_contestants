@@ -29,7 +29,7 @@
 			return Promise.resolve(new CupsManager()).then(function(cManager){
 				cManager.getContestants(options.game, options.zone, options.limit)
 					.then(function(teams){
-						console.log(teams);
+						console.log(JSON.stringify(teams));
 					}).catch(function(reason){
 						throw reason;
 					});

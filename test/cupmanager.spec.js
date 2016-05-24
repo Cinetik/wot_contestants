@@ -16,6 +16,7 @@
 
 	describe('CupsManager', function(){
 		var cManager = new CupsManager();
+		var cup = {id: "136085", teamSize: 3};
 
 		it('should get cups from a game and zone', function(done){
 
@@ -38,15 +39,26 @@
 			nock('http://play.eslgaming.com')
 				.get('/api/leagues/' + 136085 + '/ranking?limit=25')
 				.replyWithFile(200, __dirname + '/cup.json');
-			var cup = {id: "136085", teamSize: 3};
 			cManager.get(cup).then(function(data){
 				expect(data).to.be.an.object();
 				fs.readFile(__dirname + '/cup.json', function(err, file){
+					expect(err).to.not.exist();
 					expect(data).to.equal(file);
 				});
-
 				done();
 			}).catch(done);
+		});
+
+		it('should return an error when ESLAPI is returning an error', function(done){
+			nock('http://play.eslgaming.com')
+				.get('/api/leagues/' + 136085 + '/ranking?limit=25')
+				.reply(404, {'error':'not found'});
+			cManager.get(cup).then(function(result){
+				done(new Error('promise should be rejected and caught'));
+			}).catch(function(error){
+				expect(error).to.exist();
+				done();
+			});
 		});
 
 	});
