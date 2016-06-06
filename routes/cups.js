@@ -1,18 +1,19 @@
-(function(){
+(function () {
 	'use strict';
+
 	var CupsManager = require('../managers/cupsmanager');
 	var Hoek = require('hoek');
 	var Joi = require('joi');
 
-	var routeConfig =
-	{
+	var routeConfig = {
 		method: 'GET',
 		handler: function (request, reply) {
 			Promise.resolve(new CupsManager()).then(function(cManager){
 				var limit = request.params.limit || 25;
 				cManager.getContestants(request.params.game, request.params.zone, limit)
 					.then(function(teams){
-						reply(JSON.stringify(teams));
+						reply(JSON.stringify(teams))
+						.type('application/json');
 					}).catch(function(reason){
 						reply(reason);
 					});
